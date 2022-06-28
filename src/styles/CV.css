@@ -1,0 +1,6 @@
+.cv {
+  height: 100%;
+  width: 40%;
+  background-color: var(--color-slate-50);
+  box-shadow: 0 0 0.8rem 0 var(--color-slate-900-alpha-20);
+}
