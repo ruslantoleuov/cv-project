@@ -1,11 +1,7 @@
 .app {
   min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header"
-    "main"
-    "footer";
-
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
   background-color: var(--color-slate-100);
 }
