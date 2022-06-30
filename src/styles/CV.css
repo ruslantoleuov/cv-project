@@ -16,6 +16,22 @@
   font-size: 1.5rem;
 }
 
+.cv.color-red {
+  background-color: var(--color-red-200);
+}
+
+.cv.color-green {
+  background-color: var(--color-green-200);
+}
+
+.cv.color-blue {
+  background-color: var(--color-blue-200);
+}
+
+.cv.color-purple {
+  background-color: var(--color-purple-200);
+}
+
 .contact-info {
   grid-area: contact-info;
   display: grid;
