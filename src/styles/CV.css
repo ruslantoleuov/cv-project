@@ -1,6 +1,155 @@
 .cv {
-  height: 100%;
-  width: 40%;
+  min-height: 100%;
+  width: 90rem;
+  display: grid;
+  grid-template-rows: repeat(4, auto) 1fr;
+  grid-template-areas:
+    "contact-info"
+    "about-me"
+    "achievements"
+    "skills"
+    "employment-history";
+  row-gap: 3rem;
   background-color: var(--color-slate-50);
   box-shadow: 0 0 0.8rem 0 var(--color-slate-900-alpha-20);
+  padding: 6rem 8rem;
+  font-size: 1.5rem;
+}
+
+.contact-info {
+  grid-area: contact-info;
+  display: grid;
+  grid-template-columns: repeat(2, auto) 1fr;
+  grid-template-rows: repeat(3, auto) 1fr;
+  grid-template-areas:
+    "img full-name email"
+    "img job-title mobile-number"
+    "img hr hr"
+    "img address address";
+  column-gap: 4rem;
+  row-gap: 0.8rem;
+}
+
+.user-img {
+  grid-area: img;
+  height: 12rem;
+  width: 12rem;
+  border-radius: 1rem;
+}
+
+.full-name {
+  grid-area: full-name;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.job-title {
+  grid-area: job-title;
+  font-weight: 500;
+}
+
+.email {
+  grid-area: email;
+  justify-self: end;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.mobile-number {
+  grid-area: mobile-number;
+  justify-self: end;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+hr {
+  grid-area: hr;
+  border: none;
+  height: 0.3rem;
+  border-radius: 4rem;
+  background-color: currentColor;
+}
+
+.address {
+  grid-area: address;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.about-me {
+  grid-area: about-me;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 3rem;
+}
+
+.achievements {
+  grid-area: achievements;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
+.skills-container {
+  grid-area: skills;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5rem;
+  row-gap: 2rem;
+  list-style: none;
+  margin-left: 2.5rem;
+  margin-top: 2rem;
+}
+
+.skills > li {
+  flex: 0 1 auto;
+  width: 28%;
+  position: relative;
+}
+
+.skills > li::before {
+  content: url(../assets/icons/minus-thick.svg);
+  position: absolute;
+  left: -15%;
+  z-index: 10;
+}
+
+.employment-history {
+  grid-area: employment-history;
+}
+
+.employment-history > .company {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "company-name achievements"
+    "working-years achievements";
+  column-gap: 5rem;
+  row-gap: 1.6rem;
+  margin-top: 4rem;
+}
+
+.company-name {
+  grid-area: company-name;
+  width: 30rem;
+  font-size: 1.8rem;
+  font-weight: bolder;
+}
+
+.company-working-years {
+  grid-area: working-years;
+}
+
+.employment-history > .company .last-job-achievements {
+  grid-area: achievements;
+  margin-left: 2rem;
 }

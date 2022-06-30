@@ -1,6 +1,24 @@
 .main {
-  grid-area: main;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
+}
+
+.save-pdf-button {
+  border: none;
+  background-color: var(--color-slate-500);
+  color: var(--color-slate-50);
+  padding: 1.5rem 2rem;
+  border-radius: 0.6rem;
+  font-weight: 500;
+}
+
+.save-pdf-button:hover {
+  background-color: var(--color-slate-400);
+}
+
+.save-pdf-button:active {
+  background-color: var(--color-slate-500);
 }
