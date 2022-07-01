@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { v4 as uuidv4 } from "uuid";
 import CV from "./CV";
+import ColorButton from "../components/ColorButton";
 import "../styles/Main.css";
 
 class Main extends Component {
@@ -13,6 +15,36 @@ class Main extends Component {
     this.pointerLeaveHandler = this.pointerLeaveHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
     this.colorButtonsRef = React.createRef();
+
+    this.state = {
+      colorButtons: [
+        {
+          className: "color-button color-button-1 active-color",
+          title: "Slate",
+          type: "button",
+        },
+        {
+          className: "color-button color-button-2",
+          title: "Red",
+          type: "button",
+        },
+        {
+          className: "color-button color-button-3",
+          title: "Green",
+          type: "button",
+        },
+        {
+          className: "color-button color-button-4",
+          title: "Blue",
+          type: "button",
+        },
+        {
+          className: "color-button color-button-5",
+          title: "Purple",
+          type: "button",
+        },
+      ],
+    };
   }
 
   generatePDF() {
@@ -129,41 +161,9 @@ class Main extends Component {
           ref={this.colorButtonsRef}
           className="color-buttons"
         >
-          <button
-            className="color-button color-button-1 active-color"
-            title="Slate"
-            type="button"
-          >
-            &nbsp;
-          </button>
-          <button
-            className="color-button color-button-2"
-            title="Red"
-            type="button"
-          >
-            &nbsp;
-          </button>
-          <button
-            className="color-button color-button-3"
-            title="Green"
-            type="button"
-          >
-            &nbsp;
-          </button>
-          <button
-            className="color-button color-button-4"
-            title="Blue"
-            type="button"
-          >
-            &nbsp;
-          </button>
-          <button
-            className="color-button color-button-5"
-            title="Purple"
-            type="button"
-          >
-            &nbsp;
-          </button>
+          {this.state.colorButtons.map((btn) => (
+            <ColorButton key={uuidv4()} colorBtnProps={btn} />
+          ))}
         </div>
         <CV />
       </main>
