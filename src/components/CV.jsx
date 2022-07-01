@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ListItems from "./ListItems";
+import JobAchievement from "../components/JobAchievement";
 import imgUrl from "../assets/images/person-img.jpg";
 import "../styles/CV.css";
 
@@ -72,19 +73,8 @@ class CV extends Component {
         </div>
         <div className="employment-history">
           <div className="title">Employment History</div>
-          {employmentHistory.map((el) => (
-            <div className="company" key={uuidv4()}>
-              <div className="company-name">
-                {el.jobPosition} at {el.company}, {el.state}
-              </div>
-              <div className="company-working-years">
-                {el.workStart} - {el.workEnd}
-              </div>
-              <ListItems
-                className="last-job-achievements"
-                listItems={el.achievements}
-              />
-            </div>
+          {employmentHistory.map((lastJob) => (
+            <JobAchievement key={uuidv4()} lastJob={lastJob} />
           ))}
         </div>
       </div>
