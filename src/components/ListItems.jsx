@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "../styles/ListItems.css";
 
 class ListItems extends Component {
   constructor(props) {
