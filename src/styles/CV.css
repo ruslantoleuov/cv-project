@@ -53,6 +53,10 @@
   border-radius: 1rem;
 }
 
+.choose-img {
+  display: none;
+}
+
 .full-name {
   grid-area: full-name;
   font-size: 2.5rem;

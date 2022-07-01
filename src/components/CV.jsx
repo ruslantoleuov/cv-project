@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ListItems from "./ListItems";
 import JobAchievement from "../components/JobAchievement";
@@ -8,6 +8,10 @@ import "../styles/CV.css";
 class CV extends Component {
   constructor(props) {
     super(props);
+    this.imageChange = this.imageChange.bind(this);
+    this.imageChoose = this.imageChoose.bind(this);
+    this.imgRef = React.createRef();
+    this.inputRef = React.createRef();
     this.state = {
       contactInfo: {
         firstName: "Monica",
@@ -48,6 +52,26 @@ class CV extends Component {
       ],
     };
   }
+
+  imageChange(evt) {
+    this.files = evt.target.files;
+    if (!this.files || this.files.length === 0) return;
+    this.file = this.files[0];
+    this.reader = new FileReader();
+    this.reader.readAsDataURL(this.file);
+    this.reader.addEventListener(
+      "load",
+      () => {
+        this.imgRef.current.src = this.reader.result;
+      },
+      { once: true }
+    );
+  }
+
+  imageChoose() {
+    this.inputRef.current.click();
+  }
+
   render() {
     const { contactInfo, aboutMe, achievements, skills, employmentHistory } =
       this.state;
@@ -55,7 +79,19 @@ class CV extends Component {
     return (
       <div className="cv">
         <div className="contact-info">
-          <img className="user-img" src={imgUrl} alt="User image" />
+          <img
+            onClick={this.imageChoose}
+            ref={this.imgRef}
+            className="user-img"
+            src={imgUrl}
+            alt="User image"
+          />
+          <input
+            className="choose-img"
+            ref={this.inputRef}
+            onChange={this.imageChange}
+            type="file"
+          />
           <div className="full-name">
             {contactInfo.firstName} {contactInfo.lastName}
           </div>
