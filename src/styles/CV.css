@@ -32,6 +32,37 @@
   background-color: var(--color-purple-200);
 }
 
+.cv > *:not(.contact-info, .skills-container, .employment-history),
+.contact-info > *:not(.user-img, hr),
+.skills > *,
+.company > *:not(.last-job-achievements),
+.last-job-achievements > * {
+  outline: none;
+  border: none;
+}
+
+.cv > *:not(.contact-info, .skills-container, .employment-history):hover,
+.contact-info > *:not(.user-img, hr):hover,
+.skills > *:hover,
+.company > *:not(.last-job-achievements):hover,
+.last-job-achievements > *:hover {
+  position: relative;
+  cursor: pointer;
+}
+
+.cv > *:not(.contact-info, .skills-container, .employment-history):hover::after,
+.contact-info > *:not(.user-img, hr):hover::after,
+.skills > *:hover::after,
+.company > *:not(.last-job-achievements):hover::after,
+.last-job-achievements > *:hover::after {
+  content: url(../assets/icons/edit-svgrepo-com.svg);
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-left: 0.5rem;
+  position: absolute;
+  z-index: 100;
+}
+
 .contact-info {
   grid-area: contact-info;
   display: grid;

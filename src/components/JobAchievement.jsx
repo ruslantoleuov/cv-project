@@ -11,10 +11,18 @@ class JobAchievement extends Component {
 
     return (
       <div className="company">
-        <div className="company-name">
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          className="company-name"
+        >
           {lastJob.jobPosition} at {lastJob.company}, {lastJob.state}
         </div>
-        <div className="company-working-years">
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          className="company-working-years"
+        >
           {lastJob.workStart} - {lastJob.workEnd}
         </div>
         <ListItems

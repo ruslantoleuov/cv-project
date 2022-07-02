@@ -92,17 +92,53 @@ class CV extends Component {
             onChange={this.imageChange}
             type="file"
           />
-          <div className="full-name">
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            className="full-name"
+          >
             {contactInfo.firstName} {contactInfo.lastName}
           </div>
-          <div className="job-title">{contactInfo.jobTitle}</div>
-          <div className="email">{contactInfo.email}</div>
-          <div className="mobile-number">{contactInfo.mobileNumber}</div>
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            className="job-title"
+          >
+            {contactInfo.jobTitle}
+          </div>
+          <div contentEditable suppressContentEditableWarning className="email">
+            {contactInfo.email}
+          </div>
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            className="mobile-number"
+          >
+            {contactInfo.mobileNumber}
+          </div>
           <hr />
-          <div className="address">{contactInfo.address}</div>
+          <div
+            contentEditable
+            suppressContentEditableWarning
+            className="address"
+          >
+            {contactInfo.address}
+          </div>
         </div>
-        <div className="about-me">{aboutMe}</div>
-        <div className="achievements">{achievements}</div>
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          className="about-me"
+        >
+          {aboutMe}
+        </div>
+        <div
+          contentEditable
+          suppressContentEditableWarning
+          className="achievements"
+        >
+          {achievements}
+        </div>
         <div className="skills-container">
           <div className="title">Skills</div>
           <ListItems className="skills" listItems={skills} />

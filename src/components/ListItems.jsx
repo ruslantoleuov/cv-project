@@ -10,7 +10,9 @@ class ListItems extends Component {
     return (
       <ul className={this.props.className}>
         {this.props.listItems.map((el) => (
-          <li key={uuidv4()}>{el}</li>
+          <li contentEditable suppressContentEditableWarning key={uuidv4()}>
+            {el}
+          </li>
         ))}
       </ul>
     );
