@@ -87,6 +87,7 @@ class CV extends Component {
             alt="User image"
           />
           <input
+            title="Choose image"
             className="choose-img"
             ref={this.inputRef}
             onChange={this.imageChange}
