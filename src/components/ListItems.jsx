@@ -10,7 +10,12 @@ class ListItems extends Component {
     return (
       <ul className={this.props.className}>
         {this.props.listItems.map((el) => (
-          <li contentEditable suppressContentEditableWarning key={uuidv4()}>
+          <li
+            role="textbox"
+            contentEditable
+            suppressContentEditableWarning
+            key={uuidv4()}
+          >
             {el}
           </li>
         ))}

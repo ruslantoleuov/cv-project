@@ -12,6 +12,7 @@ class JobAchievement extends Component {
     return (
       <div className="company">
         <div
+          role="textbox"
           contentEditable
           suppressContentEditableWarning
           className="company-name"
@@ -19,6 +20,7 @@ class JobAchievement extends Component {
           {lastJob.jobPosition} at {lastJob.company}, {lastJob.state}
         </div>
         <div
+          role="textbox"
           contentEditable
           suppressContentEditableWarning
           className="company-working-years"

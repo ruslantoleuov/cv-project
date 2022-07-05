@@ -93,6 +93,7 @@ class CV extends Component {
             type="file"
           />
           <div
+            role="textbox"
             contentEditable
             suppressContentEditableWarning
             className="full-name"
@@ -100,16 +101,23 @@ class CV extends Component {
             {contactInfo.firstName} {contactInfo.lastName}
           </div>
           <div
+            role="textbox"
             contentEditable
             suppressContentEditableWarning
             className="job-title"
           >
             {contactInfo.jobTitle}
           </div>
-          <div contentEditable suppressContentEditableWarning className="email">
+          <div
+            role="textbox"
+            contentEditable
+            suppressContentEditableWarning
+            className="email"
+          >
             {contactInfo.email}
           </div>
           <div
+            role="textbox"
             contentEditable
             suppressContentEditableWarning
             className="mobile-number"
@@ -118,6 +126,7 @@ class CV extends Component {
           </div>
           <hr />
           <div
+            role="textbox"
             contentEditable
             suppressContentEditableWarning
             className="address"
@@ -126,6 +135,7 @@ class CV extends Component {
           </div>
         </div>
         <div
+          role="textbox"
           contentEditable
           suppressContentEditableWarning
           className="about-me"
@@ -133,6 +143,7 @@ class CV extends Component {
           {aboutMe}
         </div>
         <div
+          role="textbox"
           contentEditable
           suppressContentEditableWarning
           className="achievements"
