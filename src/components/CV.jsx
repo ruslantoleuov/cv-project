@@ -82,6 +82,7 @@ class CV extends Component {
           <img
             onClick={this.imageChoose}
             ref={this.imgRef}
+            title="Choose image"
             className="user-img"
             src={imgUrl}
             alt="User image"
