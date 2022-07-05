@@ -11,6 +11,7 @@ class ListItems extends Component {
       <ul className={this.props.className}>
         {this.props.listItems.map((el) => (
           <li
+            title={this.props.title}
             role="textbox"
             contentEditable
             suppressContentEditableWarning

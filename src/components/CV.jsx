@@ -99,6 +99,7 @@ class CV extends Component {
             contentEditable
             suppressContentEditableWarning
             className="full-name"
+            title="Full Name"
           >
             {contactInfo.firstName} {contactInfo.lastName}
           </div>
@@ -107,6 +108,7 @@ class CV extends Component {
             contentEditable
             suppressContentEditableWarning
             className="job-title"
+            title="Job Title"
           >
             {contactInfo.jobTitle}
           </div>
@@ -115,6 +117,7 @@ class CV extends Component {
             contentEditable
             suppressContentEditableWarning
             className="email"
+            title="Email"
           >
             {contactInfo.email}
           </div>
@@ -123,6 +126,7 @@ class CV extends Component {
             contentEditable
             suppressContentEditableWarning
             className="mobile-number"
+            title="Mobile Number"
           >
             {contactInfo.mobileNumber}
           </div>
@@ -132,6 +136,7 @@ class CV extends Component {
             contentEditable
             suppressContentEditableWarning
             className="address"
+            title="Address"
           >
             {contactInfo.address}
           </div>
@@ -141,6 +146,7 @@ class CV extends Component {
           contentEditable
           suppressContentEditableWarning
           className="about-me"
+          title="About Me"
         >
           {aboutMe}
         </div>
@@ -149,12 +155,13 @@ class CV extends Component {
           contentEditable
           suppressContentEditableWarning
           className="achievements"
+          title="Achievements"
         >
           {achievements}
         </div>
         <div className="skills-container">
           <div className="title">Skills</div>
-          <ListItems className="skills" listItems={skills} />
+          <ListItems className="skills" title="Skill" listItems={skills} />
         </div>
         <div className="employment-history">
           <div className="title">Employment History</div>
