@@ -6,28 +6,23 @@ import InputField from "./InputField";
 import TextArea from "./TextArea";
 import CV from "./CV";
 import "../styles/Main.css";
-import Button from "./Button";
 import ButtonAdd from "./ButtonAdd";
 import ButtonRemove from "./ButtonRemove";
 import imgUrl from "../assets/images/person-img.jpg";
+import ColorButtons from "./ColorButtons";
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.doc = new jsPDF("portrait", "pt", "a4");
     this.generatePDF = this.generatePDF.bind(this);
     this.imageChange = this.imageChange.bind(this);
-    this.pointerEnterHandler = this.pointerEnterHandler.bind(this);
-    this.pointerLeaveHandler = this.pointerLeaveHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.clickColorHandler = this.clickColorHandler.bind(this);
     this.addSkill = this.addSkill.bind(this);
     this.removeSkill = this.removeSkill.bind(this);
     this.addPastJob = this.addPastJob.bind(this);
     this.removePastJob = this.removePastJob.bind(this);
     this.addAchievement = this.addAchievement.bind(this);
     this.removeAchievement = this.removeAchievement.bind(this);
-    this.colorButtonsRef = React.createRef();
 
     this.state = {
       imgUrl: imgUrl,
@@ -132,91 +127,6 @@ class Main extends Component {
       }
       pdf.save("cv.pdf");
     });
-  }
-
-  pointerEnterHandler(evt) {
-    if (!evt.target.classList.contains("color-buttons")) {
-      const target = getComputedStyle(evt.target);
-      const cv = document.querySelector(".cv");
-
-      for (const child of this.colorButtonsRef.current.children) {
-        child.classList.remove("active-color");
-      }
-
-      cv.style.backgroundColor = target.backgroundColor;
-    }
-  }
-
-  pointerLeaveHandler(evt) {
-    if (!evt.target.classList.contains("color-buttons")) {
-      const cv = document.querySelector(".cv");
-      cv.removeAttribute("style");
-
-      switch (true) {
-        case cv.classList.contains("color-red"):
-          this.colorButtonsRef.current.children[1].classList.add(
-            "active-color"
-          );
-          break;
-        case cv.classList.contains("color-green"):
-          this.colorButtonsRef.current.children[2].classList.add(
-            "active-color"
-          );
-          break;
-        case cv.classList.contains("color-blue"):
-          this.colorButtonsRef.current.children[3].classList.add(
-            "active-color"
-          );
-          break;
-        case cv.classList.contains("color-purple"):
-          this.colorButtonsRef.current.children[4].classList.add(
-            "active-color"
-          );
-          break;
-        default:
-          this.colorButtonsRef.current.children[0].classList.add(
-            "active-color"
-          );
-          break;
-      }
-    }
-  }
-
-  clickColorHandler(evt) {
-    if (!evt.target.classList.contains("color-buttons")) {
-      const cv = document.querySelector(".cv");
-
-      for (const child of this.colorButtonsRef.current.children) {
-        child.classList.remove("active-color");
-      }
-
-      switch (true) {
-        case evt.target.classList.contains("color-button-1"):
-          cv.className = "cv";
-          evt.target.classList.add("active-color");
-          break;
-        case evt.target.classList.contains("color-button-2"):
-          cv.className = "cv";
-          cv.classList.add("color-red");
-          evt.target.classList.add("active-color");
-          break;
-        case evt.target.classList.contains("color-button-3"):
-          cv.className = "cv";
-          cv.classList.add("color-green");
-          evt.target.classList.add("active-color");
-          break;
-        case evt.target.classList.contains("color-button-4"):
-          cv.className = "cv";
-          cv.classList.add("color-blue");
-          evt.target.classList.add("active-color");
-          break;
-        case evt.target.classList.contains("color-button-5"):
-          cv.className = "cv";
-          cv.classList.add("color-purple");
-          evt.target.classList.add("active-color");
-          break;
-      }
-    }
   }
 
   addSkill() {
@@ -354,22 +264,7 @@ class Main extends Component {
         >
           Save as PDF
         </button>
-        <div
-          onClick={this.clickColorHandler}
-          onPointerOver={this.pointerEnterHandler}
-          onPointerOut={this.pointerLeaveHandler}
-          ref={this.colorButtonsRef}
-          className="color-buttons"
-        >
-          <Button
-            className="color-button color-button-1 active-color"
-            title="Slate"
-          />
-          <Button className="color-button color-button-2  " title="Red" />
-          <Button className="color-button color-button-3  " title="Green" />
-          <Button className="color-button color-button-4  " title="Blue" />
-          <Button className="color-button color-button-5  " title="Purple" />
-        </div>
+        <ColorButtons />
         <form className="input-fields">
           <InputField id="changePhoto" type="file" onChange={this.imageChange}>
             Change photo
