@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import JobAchievement from "../components/JobAchievement";
 import "../styles/CV.css";
+import imgUrl from "../assets/images/person-img.jpg";
 
 class CV extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class CV extends Component {
     return (
       <div className="cv">
         <div className="contact-info">
-          <img className="user-img" src={this.props.imgUrl} alt="User image" />
+          <img className="user-img" src={imgUrl} alt="User image" />
           <div className="full-name">
             {contactInfo.firstName + " " + contactInfo.lastName}
           </div>
