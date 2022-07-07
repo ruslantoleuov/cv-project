@@ -1,14 +1,8 @@
 .cv {
-  min-height: 100%;
+  grid-area: cv;
   width: 90rem;
-  display: grid;
-  grid-template-rows: repeat(4, auto) 1fr;
-  grid-template-areas:
-    "contact-info"
-    "about-me"
-    "achievements"
-    "skills"
-    "employment-history";
+  display: flex;
+  flex-direction: column;
   row-gap: 3rem;
   background-color: var(--color-slate-50);
   box-shadow: 0 0 0.8rem 0 var(--color-slate-900-alpha-20);
@@ -32,41 +26,9 @@
   background-color: var(--color-purple-200);
 }
 
-.cv > *:not(.contact-info, .skills-container, .employment-history),
-.contact-info > *:not(.user-img, hr),
-.skills > *,
-.company > *:not(.last-job-achievements),
-.last-job-achievements > * {
-  outline: none;
-  border: none;
-}
-
-.cv > *:not(.contact-info, .skills-container, .employment-history):hover,
-.contact-info > *:not(.user-img, hr):hover,
-.skills > *:hover,
-.company > *:not(.last-job-achievements):hover,
-.last-job-achievements > *:hover {
-  position: relative;
-  cursor: pointer;
-}
-
-.cv > *:not(.contact-info, .skills-container, .employment-history):hover::after,
-.contact-info > *:not(.user-img, hr):hover::after,
-.skills > *:hover::after,
-.company > *:not(.last-job-achievements):hover::after,
-.last-job-achievements > *:hover::after {
-  content: url(../assets/icons/edit-svgrepo-com.svg);
-  width: 1.7rem;
-  height: 1.7rem;
-  margin-left: 0.5rem;
-  position: absolute;
-  z-index: 100;
-}
-
 .contact-info {
-  grid-area: contact-info;
   display: grid;
-  grid-template-columns: repeat(2, auto) 1fr;
+  grid-template-columns: auto repeat(2, 1fr);
   grid-template-rows: repeat(3, auto) 1fr;
   grid-template-areas:
     "img full-name email"
@@ -109,6 +71,20 @@
   font-weight: 500;
 }
 
+.full-name,
+.job-title,
+.email,
+.mobile-number,
+.address,
+.about-me,
+.achievements,
+.skills > li,
+.company-name,
+.company-working-years,
+.last-job-achievements > li {
+  overflow-wrap: anywhere;
+}
+
 .mobile-number {
   grid-area: mobile-number;
   justify-self: end;
@@ -131,24 +107,15 @@ hr {
 }
 
 .about-me {
-  grid-area: about-me;
   font-size: 3rem;
   font-weight: 500;
   line-height: 1.4;
   margin-top: 3rem;
 }
 
-.achievements {
-  grid-area: achievements;
-}
-
 .title {
   font-size: 1.3rem;
   font-weight: bolder;
-}
-
-.skills-container {
-  grid-area: skills;
 }
 
 .skills {
@@ -174,10 +141,6 @@ hr {
   z-index: 10;
 }
 
-.employment-history {
-  grid-area: employment-history;
-}
-
 .employment-history > .company {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -201,7 +164,7 @@ hr {
   grid-area: working-years;
 }
 
-.employment-history > .company .last-job-achievements {
+.last-job-achievements {
   grid-area: achievements;
   margin-left: 2rem;
 }
