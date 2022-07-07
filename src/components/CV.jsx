@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import "../styles/CV.css";
+import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import JobAchievement from "../components/JobAchievement";
-import "../styles/CV.css";
 import imgUrl from "../assets/images/person-img.jpg";
 
 class CV extends Component {
