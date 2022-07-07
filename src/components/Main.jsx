@@ -1,31 +1,23 @@
-import React, { Component } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { v4 as uuidv4 } from "uuid";
-import InputField from "./InputField";
-import TextArea from "./TextArea";
-import CV from "./CV";
 import "../styles/Main.css";
-import ButtonAdd from "./ButtonAdd";
-import ButtonRemove from "./ButtonRemove";
-import imgUrl from "../assets/images/person-img.jpg";
+import { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
+import CV from "./CV";
 import ColorButtons from "./ColorButtons";
+import ButtonSavePDF from "./ButtonSavePDF";
+import Editor from "./Editor";
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.generatePDF = this.generatePDF.bind(this);
-    this.imageChange = this.imageChange.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.addSkill = this.addSkill.bind(this);
     this.removeSkill = this.removeSkill.bind(this);
     this.addPastJob = this.addPastJob.bind(this);
     this.removePastJob = this.removePastJob.bind(this);
     this.addAchievement = this.addAchievement.bind(this);
     this.removeAchievement = this.removeAchievement.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
 
     this.state = {
-      imgUrl: imgUrl,
       cv: {
         contactInfo: {
           firstName: "Monica",
@@ -88,45 +80,6 @@ class Main extends Component {
         ],
       },
     };
-  }
-
-  imageChange(evt) {
-    this.files = evt.target.files;
-    if (!this.files || this.files.length === 0) return;
-    this.file = this.files[0];
-    this.reader = new FileReader();
-    this.reader.readAsDataURL(this.file);
-    this.reader.addEventListener(
-      "load",
-      () => {
-        const userImg = document.querySelector(".user-img");
-        userImg.src = this.reader.result;
-      },
-      { once: true }
-    );
-  }
-
-  generatePDF() {
-    const cv = document.querySelector(".cv");
-    html2canvas(cv, { scale: 2 }).then((canvas) => {
-      const imgWidth = 210;
-      const pageHeight = 297;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-      const imgData = canvas.toDataURL("img/png");
-      const pdf = new jsPDF("portrait", "mm", "a4");
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-      pdf.save("cv.pdf");
-    });
   }
 
   addSkill() {
@@ -257,187 +210,19 @@ class Main extends Component {
 
     return (
       <main className="main">
-        <button
-          className="save-pdf-button"
-          onClick={this.generatePDF}
-          type="button"
-        >
-          Save as PDF
-        </button>
+        <ButtonSavePDF />
         <ColorButtons />
-        <form className="input-fields">
-          <InputField id="changePhoto" type="file" onChange={this.imageChange}>
-            Change photo
-          </InputField>
-          <InputField
-            id="firstName"
-            type="text"
-            value={cv.contactInfo.firstName}
-            onChange={this.onChangeHandler}
-          >
-            First name
-          </InputField>
-          <InputField
-            id="lastName"
-            type="text"
-            value={cv.contactInfo.lastName}
-            onChange={this.onChangeHandler}
-          >
-            Last name
-          </InputField>
-          <InputField
-            id="jobTitle"
-            type="text"
-            value={cv.contactInfo.jobTitle}
-            onChange={this.onChangeHandler}
-          >
-            Job title
-          </InputField>
-          <InputField
-            id="email"
-            type="text"
-            value={cv.contactInfo.email}
-            onChange={this.onChangeHandler}
-          >
-            Email
-          </InputField>
-          <InputField
-            id="mobileNumber"
-            type="text"
-            value={cv.contactInfo.mobileNumber}
-            onChange={this.onChangeHandler}
-          >
-            Mobile number
-          </InputField>
-          <InputField
-            id="address"
-            type="text"
-            value={cv.contactInfo.address}
-            onChange={this.onChangeHandler}
-          >
-            Address
-          </InputField>
-          <TextArea
-            id="aboutMe"
-            value={cv.aboutMe}
-            onChange={this.onChangeHandler}
-          >
-            About me
-          </TextArea>
-          <TextArea
-            id="achievements"
-            value={cv.achievements}
-            onChange={this.onChangeHandler}
-          >
-            Achievements
-          </TextArea>
-          <div>Skills</div>
-          <div className="skillsInputs">
-            {cv.skills.map((skill, i) => (
-              <div key={skill.id}>
-                <input
-                  onChange={this.onChangeHandler}
-                  type="text"
-                  value={skill.text}
-                  title={"Skill " + [i + 1]}
-                  id={skill.id}
-                />
-                {i > 0 && (
-                  <ButtonRemove
-                    onClick={this.removeSkill.bind(this, skill)}
-                    className="delete-skill-btn"
-                  />
-                )}
-              </div>
-            ))}
-
-            <ButtonAdd onClick={this.addSkill} />
-          </div>
-
-          <div>Employment History</div>
-          {cv.employmentHistory.map((history, historyIndex) => {
-            return (
-              <div className="employmentHistoryInputs" key={history.id}>
-                <InputField
-                  id="companyName"
-                  type="text"
-                  value={history.company}
-                  onChange={this.onChangeHandler}
-                >
-                  Company name
-                </InputField>
-                <InputField
-                  id="jobPosition"
-                  type="text"
-                  value={history.jobPosition}
-                  onChange={this.onChangeHandler}
-                >
-                  Job position
-                </InputField>
-                <InputField
-                  id="jobLocation"
-                  type="text"
-                  value={history.jobLocation}
-                  onChange={this.onChangeHandler}
-                >
-                  City
-                </InputField>
-                <InputField
-                  id="workStart"
-                  type="text"
-                  value={history.workStart}
-                  onChange={this.onChangeHandler}
-                >
-                  From
-                </InputField>
-                <InputField
-                  id="workEnd"
-                  type="text"
-                  value={history.workEnd}
-                  onChange={this.onChangeHandler}
-                >
-                  To
-                </InputField>
-                <div>Achievements</div>
-                <div className="last-job-achievements">
-                  {history.achievements.map((achievement, achievementIndex) => (
-                    <div key={achievement.id}>
-                      <textarea
-                        onChange={this.onChangeHandler}
-                        type="text"
-                        value={achievement.text}
-                        title={"Achievement " + [achievementIndex + 1]}
-                      />
-                      {achievementIndex > 0 && (
-                        <ButtonRemove
-                          onClick={this.removeAchievement.bind(
-                            this,
-                            achievement,
-                            historyIndex
-                          )}
-                          className="delete-achievement-btn"
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {historyIndex > 0 && (
-                  <ButtonRemove
-                    onClick={this.removePastJob.bind(this, history)}
-                    className="delete-btn"
-                  />
-                )}
-
-                <ButtonAdd
-                  onClick={this.addAchievement.bind(this, historyIndex)}
-                />
-              </div>
-            );
-          })}
-          <ButtonAdd onClick={this.addPastJob} />
-        </form>
-        <CV cv={cv} imgUrl={imgUrl} />
+        <Editor
+          cv={cv}
+          addSkill={this.addSkill}
+          removeSkill={this.removeSkill}
+          addPastJob={this.addPastJob}
+          removePastJob={this.removePastJob}
+          addAchievement={this.addAchievement}
+          removeAchievement={this.removeAchievement}
+          onChangeHandler={this.onChangeHandler}
+        />
+        <CV cv={cv} />
       </main>
     );
   }
