@@ -8,6 +8,7 @@
   justify-items: center;
   align-items: start;
   row-gap: 2rem;
+  column-gap: 3rem;
 }
 
 .save-pdf-button {
@@ -87,6 +88,7 @@
   box-shadow: 0 0 0.8rem 0 var(--color-slate-900-alpha-20);
   padding: 6rem 8rem;
   font-size: 1.5rem;
+  justify-self: end;
 }
 
 .input-fields > div {
