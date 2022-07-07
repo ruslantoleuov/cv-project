@@ -26,6 +26,20 @@
   background-color: var(--color-purple-200);
 }
 
+.full-name,
+.job-title,
+.email,
+.mobile-number,
+.address,
+.about-me,
+.achievements,
+.skills > li,
+.company-name,
+.company-working-years,
+.last-job-achievements > li {
+  overflow-wrap: anywhere;
+}
+
 .contact-info {
   display: grid;
   grid-template-columns: auto repeat(2, 1fr);
@@ -44,7 +58,6 @@
   height: 12rem;
   width: 12rem;
   border-radius: 1rem;
-  cursor: pointer;
 }
 
 .choose-img {
@@ -69,20 +82,6 @@
   justify-self: end;
   font-size: 1.4rem;
   font-weight: 500;
-}
-
-.full-name,
-.job-title,
-.email,
-.mobile-number,
-.address,
-.about-me,
-.achievements,
-.skills > li,
-.company-name,
-.company-working-years,
-.last-job-achievements > li {
-  overflow-wrap: anywhere;
 }
 
 .mobile-number {
