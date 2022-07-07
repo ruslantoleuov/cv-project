@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ListItems from "../components/ListItems";
+import { v4 as uuidv4 } from "uuid";
 
 class JobAchievement extends Component {
   constructor(props) {
@@ -11,29 +11,23 @@ class JobAchievement extends Component {
 
     return (
       <div className="company">
-        <div
-          role="textbox"
-          contentEditable
-          suppressContentEditableWarning
-          className="company-name"
-          title="Company Name"
-        >
-          {lastJob.jobPosition} at {lastJob.company}, {lastJob.state}
+        <div className="company-name" title="Company Name">
+          {lastJob.jobPosition +
+            " at " +
+            lastJob.company +
+            ", " +
+            lastJob.jobLocation}
         </div>
-        <div
-          role="textbox"
-          contentEditable
-          suppressContentEditableWarning
-          className="company-working-years"
-          title="Company Working Years"
-        >
-          {lastJob.workStart} - {lastJob.workEnd}
+        <div className="company-working-years" title="Company Working Years">
+          {lastJob.workStart + " - " + lastJob.workEnd}
         </div>
-        <ListItems
-          className="last-job-achievements"
-          listItems={lastJob.achievements}
-          title="Last Job Achievement"
-        />
+        <ul className="last-job-achievements">
+          {lastJob.achievements.map((achievement) => (
+            <li key={uuidv4()} title="Last Job Achievement">
+              {achievement.text}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
