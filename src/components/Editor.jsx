@@ -1,3 +1,4 @@
+import "../styles/Editor.css";
 import { Component } from "react";
 import InputField from "./InputField";
 import TextArea from "./TextArea";
