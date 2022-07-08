@@ -41,7 +41,7 @@ class Main extends Component {
         employmentHistory: [
           {
             id: uuidv4(),
-            company: "Zane Telecommunications",
+            companyName: "Zane Telecommunications",
             jobPosition: "Marketing Manager",
             jobLocation: "Austin TX",
             workStart: "November 2011",
@@ -109,7 +109,7 @@ class Main extends Component {
         ...this.state.cv,
         employmentHistory: this.state.cv.employmentHistory.concat({
           id: uuidv4(),
-          company: "",
+          companyName: "",
           jobPosition: "",
           jobLocation: "",
           workStart: "",
@@ -171,8 +171,6 @@ class Main extends Component {
   onChangeHandler(evt) {
     evt.preventDefault();
 
-    console.log(evt.target);
-
     switch (evt.target.id) {
       case "firstName":
       case "lastName":
@@ -203,14 +201,35 @@ class Main extends Component {
         break;
     }
 
-    if (evt.target.dataset.index) {
+    if (evt.target.closest(".skillsInputs")) {
       const newSkills = [...this.state.cv.skills];
-      newSkills[evt.target.dataset.index].text = evt.target.value;
+      newSkills[evt.target.dataset.skillIndex].text = evt.target.value;
 
       this.setState({
         cv: {
           ...this.state.cv,
           skills: [...newSkills],
+        },
+      });
+    }
+
+    if (evt.target.closest(".employmentHistoryInputs")) {
+      const newEmploymentHistory = [...this.state.cv.employmentHistory];
+      newEmploymentHistory[
+        evt.target.closest(".employmentHistoryInputs").dataset.historyIndex
+      ][evt.target.id] = evt.target.value;
+
+      if (evt.target.dataset.achievementIndex) {
+        newEmploymentHistory[
+          evt.target.closest(".employmentHistoryInputs").dataset.historyIndex
+        ].achievements[[evt.target.dataset.achievementIndex]].text =
+          evt.target.value;
+      }
+
+      this.setState({
+        cv: {
+          ...this.state.cv,
+          employmentHistory: [...newEmploymentHistory],
         },
       });
     }

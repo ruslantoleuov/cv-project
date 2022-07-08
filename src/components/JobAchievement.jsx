@@ -14,7 +14,7 @@ class JobAchievement extends Component {
         <div className="company-name" title="Company Name">
           {lastJob.jobPosition +
             " at " +
-            lastJob.company +
+            lastJob.companyName +
             ", " +
             lastJob.jobLocation}
         </div>
