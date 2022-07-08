@@ -98,16 +98,16 @@ class Editor extends Component {
         </TextArea>
         <div>Skills</div>
         <div className="skillsInputs">
-          {cv.skills.map((skill, i) => (
+          {cv.skills.map((skill, skillIndex) => (
             <div key={skill.id}>
               <input
                 onChange={this.props.onChangeHandler}
                 type="text"
                 value={skill.text}
-                title={"Skill " + [i + 1]}
-                data-index={i}
+                title={"Skill " + [skillIndex + 1]}
+                data-skill-index={skillIndex}
               />
-              {i > 0 && (
+              {skillIndex > 0 && (
                 <ButtonRemove
                   onClick={this.props.removeSkill.bind(this, skill)}
                   className="delete-skill-btn"
@@ -122,11 +122,15 @@ class Editor extends Component {
         <div>Employment History</div>
         {cv.employmentHistory.map((history, historyIndex) => {
           return (
-            <div className="employmentHistoryInputs" key={history.id}>
+            <div
+              className="employmentHistoryInputs"
+              key={history.id}
+              data-history-index={historyIndex}
+            >
               <InputField
                 id="companyName"
                 type="text"
-                value={history.company}
+                value={history.companyName}
                 onChange={this.props.onChangeHandler}
               >
                 Company name
@@ -172,6 +176,7 @@ class Editor extends Component {
                       type="text"
                       value={achievement.text}
                       title={"Achievement " + [achievementIndex + 1]}
+                      data-achievement-index={achievementIndex}
                     />
                     {achievementIndex > 0 && (
                       <ButtonRemove
