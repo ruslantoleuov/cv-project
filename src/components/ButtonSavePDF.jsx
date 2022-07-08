@@ -1,6 +1,7 @@
 import { Component } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import Button from "./Button";
 
 class ButtonSavePDF extends Component {
   constructor(props) {
@@ -33,13 +34,9 @@ class ButtonSavePDF extends Component {
 
   render() {
     return (
-      <button
-        className="save-pdf-button"
-        onClick={this.generatePDF}
-        type="button"
-      >
+      <Button className="save-pdf-button" onClick={this.generatePDF}>
         Save as PDF
-      </button>
+      </Button>
     );
   }
 }
