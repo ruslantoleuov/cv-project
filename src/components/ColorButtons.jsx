@@ -1,3 +1,4 @@
+import "../styles/ColorButtons.css";
 import React, { Component } from "react";
 import Button from "./Button";
 
