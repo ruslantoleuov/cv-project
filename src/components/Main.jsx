@@ -172,7 +172,6 @@ class Main extends Component {
     evt.preventDefault();
 
     console.log(evt.target);
-    console.log(this.state.cv);
 
     switch (evt.target.id) {
       case "firstName":
@@ -202,6 +201,18 @@ class Main extends Component {
         break;
       default:
         break;
+    }
+
+    if (evt.target.dataset.index) {
+      const newSkills = [...this.state.cv.skills];
+      newSkills[evt.target.dataset.index].text = evt.target.value;
+
+      this.setState({
+        cv: {
+          ...this.state.cv,
+          skills: [...newSkills],
+        },
+      });
     }
   }
 

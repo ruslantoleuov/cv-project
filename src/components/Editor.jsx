@@ -105,7 +105,7 @@ class Editor extends Component {
                 type="text"
                 value={skill.text}
                 title={"Skill " + [i + 1]}
-                id={skill.id}
+                data-index={i}
               />
               {i > 0 && (
                 <ButtonRemove
