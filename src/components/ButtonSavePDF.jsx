@@ -1,3 +1,4 @@
+import "../styles/ButtonSavePDF.css";
 import { Component } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";

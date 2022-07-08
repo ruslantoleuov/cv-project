@@ -1,0 +1,18 @@
+.main .save-pdf-button {
+  grid-area: save-btn;
+  border: none;
+  background-color: var(--color-slate-500);
+  color: var(--color-slate-50);
+  padding: 1.5rem 2rem;
+  border-radius: 0.6rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.main .save-pdf-button:hover {
+  background-color: var(--color-slate-400);
+}
+
+.main .save-pdf-button:active {
+  background-color: var(--color-slate-500);
+}
