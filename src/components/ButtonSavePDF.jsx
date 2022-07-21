@@ -1,16 +1,10 @@
 import "../styles/ButtonSavePDF.css";
-import { Component } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Button from "./Button";
 
-class ButtonSavePDF extends Component {
-  constructor(props) {
-    super(props);
-    this.generatePDF = this.generatePDF.bind(this);
-  }
-
-  generatePDF() {
+const ButtonSavePDF = () => {
+  const generatePDF = () => {
     const cv = document.querySelector(".cv");
     html2canvas(cv, { scale: 2 }).then((canvas) => {
       const imgWidth = 210;
@@ -31,15 +25,13 @@ class ButtonSavePDF extends Component {
       }
       pdf.save("cv.pdf");
     });
-  }
+  };
 
-  render() {
-    return (
-      <Button className="save-pdf-button" onClick={this.generatePDF}>
-        Save as PDF
-      </Button>
-    );
-  }
-}
+  return (
+    <Button className="save-pdf-button" onClick={generatePDF}>
+      Save as PDF
+    </Button>
+  );
+};
 
 export default ButtonSavePDF;

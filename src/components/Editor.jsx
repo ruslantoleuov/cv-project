@@ -1,215 +1,207 @@
 import "../styles/Editor.css";
-import { Component } from "react";
 import InputField from "./InputField";
 import TextArea from "./TextArea";
 import ButtonAdd from "./ButtonAdd";
 import ButtonRemove from "./ButtonRemove";
 
-class Editor extends Component {
-  constructor(props) {
-    super(props);
-    this.imageChange = this.imageChange.bind(this);
-  }
+const Editor = (props) => {
+  const { cv } = props;
 
-  imageChange(evt) {
-    this.files = evt.target.files;
-    if (!this.files || this.files.length === 0) return;
-    this.file = this.files[0];
-    this.reader = new FileReader();
-    this.reader.readAsDataURL(this.file);
-    this.reader.addEventListener(
+  const imageChange = (evt) => {
+    const files = evt.target.files;
+    if (!files || files.length === 0) return;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.addEventListener(
       "load",
       () => {
         const userImg = document.querySelector(".user-img");
-        userImg.src = this.reader.result;
+        userImg.src = reader.result;
       },
       { once: true }
     );
-  }
+  };
 
-  render() {
-    const { cv } = this.props;
-
-    return (
-      <form className="input-fields">
-        <InputField id="changePhoto" type="file" onChange={this.imageChange}>
-          Change photo
-        </InputField>
-        <InputField
-          id="firstName"
-          type="text"
-          value={cv.contactInfo.firstName}
-          onChange={this.props.onChangeHandler}
-        >
-          First name
-        </InputField>
-        <InputField
-          id="lastName"
-          type="text"
-          value={cv.contactInfo.lastName}
-          onChange={this.props.onChangeHandler}
-        >
-          Last name
-        </InputField>
-        <InputField
-          id="jobTitle"
-          type="text"
-          value={cv.contactInfo.jobTitle}
-          onChange={this.props.onChangeHandler}
-        >
-          Job title
-        </InputField>
-        <InputField
-          id="email"
-          type="text"
-          value={cv.contactInfo.email}
-          onChange={this.props.onChangeHandler}
-        >
-          Email
-        </InputField>
-        <InputField
-          id="mobileNumber"
-          type="text"
-          value={cv.contactInfo.mobileNumber}
-          onChange={this.props.onChangeHandler}
-        >
-          Mobile number
-        </InputField>
-        <InputField
-          id="address"
-          type="text"
-          value={cv.contactInfo.address}
-          onChange={this.props.onChangeHandler}
-        >
-          Address
-        </InputField>
-        <TextArea
-          id="aboutMe"
-          value={cv.aboutMe}
-          onChange={this.props.onChangeHandler}
-        >
-          About me
-        </TextArea>
-        <TextArea
-          id="achievements"
-          value={cv.achievements}
-          onChange={this.props.onChangeHandler}
-        >
-          Achievements
-        </TextArea>
-        <div>Skills</div>
-        <div className="skillsInputs">
-          {cv.skills.map((skill, skillIndex) => (
-            <div key={skill.id}>
-              <input
-                onChange={this.props.onChangeHandler}
-                type="text"
-                value={skill.text}
-                title={"Skill " + [skillIndex + 1]}
-                data-skill-index={skillIndex}
+  return (
+    <form className="input-fields">
+      <InputField id="changePhoto" type="file" onChange={imageChange}>
+        Change photo
+      </InputField>
+      <InputField
+        id="firstName"
+        type="text"
+        value={cv.contactInfo.firstName}
+        onChange={props.onChangeHandler}
+      >
+        First name
+      </InputField>
+      <InputField
+        id="lastName"
+        type="text"
+        value={cv.contactInfo.lastName}
+        onChange={props.onChangeHandler}
+      >
+        Last name
+      </InputField>
+      <InputField
+        id="jobTitle"
+        type="text"
+        value={cv.contactInfo.jobTitle}
+        onChange={props.onChangeHandler}
+      >
+        Job title
+      </InputField>
+      <InputField
+        id="email"
+        type="text"
+        value={cv.contactInfo.email}
+        onChange={props.onChangeHandler}
+      >
+        Email
+      </InputField>
+      <InputField
+        id="mobileNumber"
+        type="text"
+        value={cv.contactInfo.mobileNumber}
+        onChange={props.onChangeHandler}
+      >
+        Mobile number
+      </InputField>
+      <InputField
+        id="address"
+        type="text"
+        value={cv.contactInfo.address}
+        onChange={props.onChangeHandler}
+      >
+        Address
+      </InputField>
+      <TextArea
+        id="aboutMe"
+        value={cv.aboutMe}
+        onChange={props.onChangeHandler}
+      >
+        About me
+      </TextArea>
+      <TextArea
+        id="achievements"
+        value={cv.achievements}
+        onChange={props.onChangeHandler}
+      >
+        Achievements
+      </TextArea>
+      <div>Skills</div>
+      <div className="skillsInputs">
+        {cv.skills.map((skill, skillIndex) => (
+          <div key={skill.id}>
+            <input
+              onChange={props.onChangeHandler}
+              type="text"
+              value={skill.text}
+              title={"Skill " + [skillIndex + 1]}
+              data-skill-index={skillIndex}
+            />
+            {skillIndex > 0 && (
+              <ButtonRemove
+                onClick={props.removeSkill.bind(null, skill)}
+                className="delete-skill-btn"
               />
-              {skillIndex > 0 && (
-                <ButtonRemove
-                  onClick={this.props.removeSkill.bind(this, skill)}
-                  className="delete-skill-btn"
-                />
-              )}
-            </div>
-          ))}
+            )}
+          </div>
+        ))}
 
-          <ButtonAdd onClick={this.props.addSkill} />
-        </div>
+        <ButtonAdd onClick={props.addSkill} />
+      </div>
 
-        <div>Employment History</div>
-        {cv.employmentHistory.map((history, historyIndex) => {
-          return (
-            <div
-              className="employmentHistoryInputs"
-              key={history.id}
-              data-history-index={historyIndex}
+      <div>Employment History</div>
+      {cv.employmentHistory.map((history, historyIndex) => {
+        return (
+          <div
+            className="employmentHistoryInputs"
+            key={history.id}
+            data-history-index={historyIndex}
+          >
+            <InputField
+              id="companyName"
+              type="text"
+              value={history.companyName}
+              onChange={props.onChangeHandler}
             >
-              <InputField
-                id="companyName"
-                type="text"
-                value={history.companyName}
-                onChange={this.props.onChangeHandler}
-              >
-                Company name
-              </InputField>
-              <InputField
-                id="jobPosition"
-                type="text"
-                value={history.jobPosition}
-                onChange={this.props.onChangeHandler}
-              >
-                Job position
-              </InputField>
-              <InputField
-                id="jobLocation"
-                type="text"
-                value={history.jobLocation}
-                onChange={this.props.onChangeHandler}
-              >
-                City
-              </InputField>
-              <InputField
-                id="workStart"
-                type="text"
-                value={history.workStart}
-                onChange={this.props.onChangeHandler}
-              >
-                From
-              </InputField>
-              <InputField
-                id="workEnd"
-                type="text"
-                value={history.workEnd}
-                onChange={this.props.onChangeHandler}
-              >
-                To
-              </InputField>
-              <div>Achievements</div>
-              <div className="last-job-achievements">
-                {history.achievements.map((achievement, achievementIndex) => (
-                  <div key={achievement.id}>
-                    <textarea
-                      onChange={this.props.onChangeHandler}
-                      type="text"
-                      value={achievement.text}
-                      title={"Achievement " + [achievementIndex + 1]}
-                      data-achievement-index={achievementIndex}
+              Company name
+            </InputField>
+            <InputField
+              id="jobPosition"
+              type="text"
+              value={history.jobPosition}
+              onChange={props.onChangeHandler}
+            >
+              Job position
+            </InputField>
+            <InputField
+              id="jobLocation"
+              type="text"
+              value={history.jobLocation}
+              onChange={props.onChangeHandler}
+            >
+              City
+            </InputField>
+            <InputField
+              id="workStart"
+              type="text"
+              value={history.workStart}
+              onChange={props.onChangeHandler}
+            >
+              From
+            </InputField>
+            <InputField
+              id="workEnd"
+              type="text"
+              value={history.workEnd}
+              onChange={props.onChangeHandler}
+            >
+              To
+            </InputField>
+            <div>Achievements</div>
+            <div className="last-job-achievements">
+              {history.achievements.map((achievement, achievementIndex) => (
+                <div key={achievement.id}>
+                  <textarea
+                    onChange={props.onChangeHandler}
+                    type="text"
+                    value={achievement.text}
+                    title={"Achievement " + [achievementIndex + 1]}
+                    data-achievement-index={achievementIndex}
+                  />
+                  {achievementIndex > 0 && (
+                    <ButtonRemove
+                      onClick={props.removeAchievement.bind(
+                        null,
+                        achievement,
+                        historyIndex
+                      )}
+                      className="delete-achievement-btn"
                     />
-                    {achievementIndex > 0 && (
-                      <ButtonRemove
-                        onClick={this.props.removeAchievement.bind(
-                          this,
-                          achievement,
-                          historyIndex
-                        )}
-                        className="delete-achievement-btn"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {historyIndex > 0 && (
-                <ButtonRemove
-                  onClick={this.props.removePastJob.bind(this, history)}
-                  className="delete-btn"
-                />
-              )}
-
-              <ButtonAdd
-                onClick={this.props.addAchievement.bind(this, historyIndex)}
-              />
+                  )}
+                </div>
+              ))}
             </div>
-          );
-        })}
-        <ButtonAdd onClick={this.props.addPastJob} />
-      </form>
-    );
-  }
-}
+
+            {historyIndex > 0 && (
+              <ButtonRemove
+                onClick={props.removePastJob.bind(null, history)}
+                className="delete-btn"
+              />
+            )}
+
+            <ButtonAdd
+              onClick={props.addAchievement.bind(null, historyIndex)}
+            />
+          </div>
+        );
+      })}
+      <ButtonAdd onClick={props.addPastJob} />
+    </form>
+  );
+};
 
 export default Editor;
